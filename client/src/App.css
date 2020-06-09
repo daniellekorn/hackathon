@@ -1,5 +1,8 @@
-body, html {
-    background:black;
+body {
+    /* background:black; */
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRCFummv2Ajy95Op_gD_wraQqmXYv58b-K715pfKtVEiFFISGYa&usqp=CAU');
+    background-repeat: no-repeat;
+    background-size: cover;
     width: 100%;
     height: 100vh;
     /* display: flex; */
@@ -17,7 +20,7 @@ body, html {
 }
 
 .fa {
-  color: pink;
+  color: white;
 }
 
 h1{
@@ -39,4 +42,20 @@ li {
 
 .sound-wave {
   margin-top: 100px;
+
+}
+
+.btn{
+    width: 100px;
+    margin: 10px
+
+}
+
+.form{
+    margin: 200px;
+}
+
+.dropdown{
+    width: 200px;
+    margin: 0;
 }

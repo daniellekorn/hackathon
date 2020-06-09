@@ -44,28 +44,28 @@ const Tracker = (props) => {
           onStop={(blob) => handleStop(blob)}
           // onData={(data) => console.log(data)}
           mimeType="audio/wav"
-          strokeColor="#ffffff"
-          backgroundColor="#000000"
+          strokeColor="#000000"
+          opacity='0'
+
         />
         <div>
           <Button
             onClick={(event) => handleStart(event)}
             disabled={isRecording}
             variant="dark"
-            backgroundColor="#000000"
-          
+            className="btn"          
             >
-           <i class="fa fa-bullseye"></i>
+           Run
           </Button>
-        </div>
 
         <Button
           variant="danger"
           onClick={(event) => handleStop(event)}
           disabled={!isRecording}
-        >
+          >
           Stop
         </Button>
+          </div>
         <div>
           <audio src={blobUrl} controls="controls" />
         </div>

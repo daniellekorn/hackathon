@@ -28,7 +28,7 @@ const App = () => {
             <Switch>
               <Route exact path="/">
               <div className="contain">
-                <h1>welcome</h1>
+                <h1>Ready to Shelp?</h1>
                 </div>
               </Route>
               <Route path="/signup">
