@@ -46,19 +46,17 @@ const Tracker = (props) => {
           mimeType="audio/wav"
           strokeColor="#ffffff"
           backgroundColor="#000000"
-
         />
         <div>
-
-          <Button onClick={(event) => handleStart(event)} disabled={isRecording}
-            variant='dark'
+          <Button
+            onClick={(event) => handleStart(event)}
+            disabled={isRecording}
+            variant="dark"
             backgroundColor="#000000"
-            >
-           <i class="fa fa-bullseye"
-              className="sound-wave"
-                     ></i>
+          >
+            <i class="fa fa-bullseye" className="sound-wave"></i>
           </Button>
-            </div>
+        </div>
 
         <Button
           variant="danger"
@@ -66,7 +64,7 @@ const Tracker = (props) => {
           disabled={!isRecording}
         >
           Stop
-      </Button>
+        </Button>
         <div>
           <audio src={blobUrl} controls="controls" />
         </div>
