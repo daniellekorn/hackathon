@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import Button from "react-bootstrap/Button";
 import { ReactMic } from "react-mic";
 import { sendAudio } from "../lib/api";
+import fire from "../lib/config";
 
 const Tracker = (props) => {
   const [isRecording, setRecording] = useState(false);
@@ -24,11 +25,10 @@ const Tracker = (props) => {
 
   let interval;
   const handleStart = () => {
-    if (!isBlocked) {
-      interval = setInterval(() => {
-        setRecording(true);
-      }, 20000);
-    }
+    setRecording(true);
+    interval = setInterval(() => {
+      setRecording(true);
+    }, 20000);
   };
 
   const handleStop = async (blob) => {
@@ -36,7 +36,10 @@ const Tracker = (props) => {
     setUrl(blob.blobURL);
     setRecording(false);
     const formData = new FormData();
-    formData.append("file", blob.blob);
+    const userId = fire.auth().currentUser.uid;
+    formData.append("file", blob);
+    console.log(blob);
+    formData.append("user", userId);
     sendAudio(formData);
   };
 

@@ -41,7 +41,7 @@ const Main = () => {
           </div>
         </Route>
         <Route path="/signup">
-          <Signup />
+          <div className="text-white">Put user info here</div>
         </Route>
         <Route path="/tracker">
           <Tracker />
