@@ -2,20 +2,23 @@ import React from "react";
 import "./App.css";
 import Tracker from "./components/Tracker";
 import Container from "./components/Tracker";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const App = () => {
   return (
-    <Container className="full-page">
-      <Router>
+    <Router>
+      <Container className="full-page">
         <Switch>
           <Route path="/dashboard">
             <Tracker />
           </Route>
-          <Route path="/">Sign Up</Route>
+          <Route path="/signup">
+            <div>Sign Up</div>
+          </Route>
+          <Route path="/">Home</Route>
         </Switch>
-      </Router>
-    </Container>
+      </Container>
+    </Router>
   );
 };
 
