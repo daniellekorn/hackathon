@@ -26,7 +26,6 @@ const Tracker = (props) => {
   const handleStart = () => {
     if (!isBlocked) {
       interval = setInterval(() => {
-        console.log("sent");
         setRecording(true);
       }, 20000);
     }
