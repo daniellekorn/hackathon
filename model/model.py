@@ -7,7 +7,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
-ALERT_WORDS = ["kill", "slut", "attack", "bitch", "permission"]
+ALERT_WORDS = ["kill", "slut", "attack", "bitch", "b****", "f******"]
 
 
 def process_wav(filename: str) -> list:
@@ -57,7 +57,7 @@ def main():
     insult_model, toxic_model, vect = load_model(insult_pickle_file='insult_shelp.pkl',
                                                  toxic_pickle_file='toxic_shelp.pkl',
                                                  vct_pickle_file='vect_shelp.pkl')
-    file_path = "test3.wav"
+    file_path = "arad.wav"
     sentences = process_wav(filename=file_path)
     is_insult, is_toxic = predict(insult_model, toxic_model, vect, sentences=sentences)
 
