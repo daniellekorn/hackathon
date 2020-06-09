@@ -9,16 +9,15 @@ body, html {
     
 }
 
-.contain{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items:center;
+.contain {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .fa {
-    color:pink 
-
+  color: pink;
 }
 
 h1{
@@ -28,19 +27,16 @@ h1{
 }
 
 ul {
-    list-style-type:none;
-    display:flex;
-    justify-content: space-between;
-    margin-top: 30px;
-
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
 }
 
 li {
-    font-size: 30px;
+  font-size: 30px;
 }
 
-
-.sound-wave{
-    margin-top: 100px
+.sound-wave {
+  margin-top: 100px;
 }
-

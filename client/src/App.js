@@ -1,5 +1,7 @@
 import React from "react";
 import "./App.css";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Tracker from "./components/Tracker";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Signup from "./components/signup"
@@ -39,6 +41,6 @@ const App = () => {
         </Router>
         // </Container>
   );
-}
+};
 
 export default App;
