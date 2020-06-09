@@ -1,13 +1,11 @@
 import React, { useState, useEffect, Fragment } from "react";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
-import MicRecorder from "mic-recorder-to-mp3";
-
-const Mp3Recorder = new MicRecorder({ bitRate: 128 });
+import { ReactMic } from "react-mic";
 
 const Tracker = (props) => {
   const [isRecording, setRecording] = useState(false);
-  const [blobURL, setBlobURL] = useState("");
+  const [blobUrl, setUrl] = useState("");
   const [isBlocked, setPermission] = useState(true);
 
   useEffect(() => {
@@ -25,29 +23,27 @@ const Tracker = (props) => {
   }, []);
 
   const handleStart = () => {
-    if (isBlocked) {
-      console.log("Permission Denied");
-    } else {
-      Mp3Recorder.start()
-        .then(() => {
-          setRecording(true);
-        })
-        .catch((e) => console.error(e));
-    }
+    isBlocked ? console.log("Permission Denied") : setRecording(true);
   };
 
-  const handleStop = () => {
-    Mp3Recorder.stop()
-      .getMp3()
-      .then(([buffer, blob]) => {
-        setBlobURL(URL.createObjectURL(blob));
-        setRecording(false);
-      })
-      .catch((e) => console.log(e));
+  const handleStop = (blob) => {
+    setUrl(blob.blobURL);
+    setRecording(false);
+    //send blob somewhere here
+    console.log(blob);
   };
 
   return (
     <Fragment>
+      <ReactMic
+        record={isRecording}
+        className="sound-wave"
+        onStop={(blob) => handleStop(blob)}
+        // onData={(data) => console.log(data)}
+        mimeType="audio/wav"
+        strokeColor="#000000"
+        backgroundColor="#FF4081"
+      />
       <Button onClick={(event) => handleStart(event)} disabled={isRecording}>
         Start
       </Button>
@@ -58,7 +54,7 @@ const Tracker = (props) => {
       >
         Stop
       </Button>
-      <audio src={blobURL} controls="controls" />
+      <audio src={blobUrl} controls="controls" />
     </Fragment>
   );
 };
