@@ -33,28 +33,42 @@ const Tracker = (props) => {
   };
 
   return (
-    <Fragment>
-      <ReactMic
-        record={isRecording}
-        className="sound-wave"
-        onStop={(blob) => handleStop(blob)}
-        // onData={(data) => console.log(data)}
-        mimeType="audio/wav"
-        strokeColor="#000000"
-        backgroundColor="#FF4081"
-      />
-      <Button onClick={(event) => handleStart(event)} disabled={isRecording}>
-        Start
+    <div className="contain">
+      <Fragment>
+        <ReactMic
+          record={isRecording}
+          className="sound-wave"
+          onStop={(blob) => handleStop(blob)}
+          // onData={(data) => console.log(data)}
+          mimeType="audio/wav"
+          strokeColor="#ffffff"
+          backgroundColor="#000000"
+
+        />
+        <div>
+
+          <Button onClick={(event) => handleStart(event)} disabled={isRecording}
+            variant='dark'
+            backgroundColor="#000000"
+            >
+           <i class="fa fa-bullseye"
+              className="sound-wave"
+                     ></i>
+          </Button>
+            </div>
+
+        <Button
+          variant="danger"
+          onClick={(event) => handleStop(event)}
+          disabled={!isRecording}
+        >
+          Stop
       </Button>
-      <Button
-        variant="danger"
-        onClick={(event) => handleStop(event)}
-        disabled={!isRecording}
-      >
-        Stop
-      </Button>
-      <audio src={blobUrl} controls="controls" />
-    </Fragment>
+        <div>
+          <audio src={blobUrl} controls="controls" />
+        </div>
+      </Fragment>
+    </div>
   );
 };
 
