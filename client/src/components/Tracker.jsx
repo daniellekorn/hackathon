@@ -46,7 +46,11 @@ const Tracker = (props) => {
         strokeColor="#000000"
         backgroundColor="#FF4081"
       />
-      <Button onClick={(event) => handleStart(event)} disabled={isRecording}>
+      <Button
+        variant="dark"
+        onClick={(event) => handleStart(event)}
+        disabled={isRecording}
+      >
         Start
       </Button>
       <Button
