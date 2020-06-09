@@ -22,15 +22,21 @@ const Tracker = (props) => {
     );
   }, []);
 
+  let interval;
   const handleStart = () => {
-    isBlocked ? console.log("Permission Denied") : setRecording(true);
+    if (!isBlocked) {
+      interval = setInterval(() => {
+        console.log("sent");
+        setRecording(true);
+      }, 20000);
+    }
   };
 
   const handleStop = async (blob) => {
+    clearInterval(interval);
     setUrl(blob.blobURL);
     setRecording(false);
     const formData = new FormData();
-    //what is the blob???
     formData.append("file", blob.blob);
     sendAudio(formData);
   };
@@ -53,9 +59,8 @@ const Tracker = (props) => {
             disabled={isRecording}
             variant="dark"
             backgroundColor="#000000"
-          
-            >
-           <i class="fa fa-bullseye"></i>
+          >
+            <i class="fa fa-bullseye"></i>
           </Button>
         </div>
 

@@ -15,6 +15,7 @@ const SignUp = (props) => {
     callback(event.target.value);
   };
 
+  //role of trainers and users -- get fit (helping to or needing)
   return (
     <Form onSubmit={(event) => handleOnSubmit(event)}>
       <Form.Group controlId="formBasicEmail">
