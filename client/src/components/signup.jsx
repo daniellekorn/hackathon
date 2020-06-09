@@ -3,22 +3,45 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 const SignUp = (props) => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, useRole] = useState("");
+  const [role, setRole] = useState("");
+
+  const handleOnSubmit = (event) => {
+    console.log(event.target.value);
+  };
+
+  const handleOnChange = (event, callback) => {
+    callback(event.target.value);
+  };
 
   return (
-    <Form>
+    <Form onSubmit={(event) => handleOnSubmit(event)}>
       <Form.Group controlId="formBasicEmail">
-        <Form.Control type="email" placeholder="Enter email" />
+        <Form.Control
+          type="email"
+          placeholder="Enter email"
+          value={email}
+          onChange={(event) => handleOnChange(event, setEmail)}
+        />
       </Form.Group>
 
       <Form.Group controlId="formBasicPassword">
-        <Form.Control type="password" placeholder="Password" />
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(event) => handleOnChange(event, setPassword)}
+        />
       </Form.Group>
 
       <Form.Group controlId="formRole">
-        <Form.Control type="text" placeholder="Role" />
+        <Form.Control
+          type="text"
+          placeholder="Role"
+          value={role}
+          onChange={(event) => handleOnChange(event, setRole)}
+        />
       </Form.Group>
 
       <Form.Group controlId="formBasicCheckbox">
