@@ -1,23 +1,42 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import fire from "../lib/config";
 
 const SignUp = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-
-  const handleOnSubmit = (event) => {
-    console.log(event.target.value);
-  };
+  const [signUpError, setSignUpError] = useState(false);
 
   const handleOnChange = (event, callback) => {
     callback(event.target.value);
   };
 
+  const signup = (e) => {
+    e.preventDefault();
+    fire
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((cred) => {
+        return fire.firestore().collection("users").doc(cred.user.uid).set({
+          uid: cred.user.uid,
+          email: email,
+          password: password,
+          role: role,
+        });
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        setSignUpError(true);
+      });
+  };
+
   //role of trainers and users -- get fit (helping to or needing)
   return (
-    <Form onSubmit={(event) => handleOnSubmit(event)}>
+    <Form>
       <Form.Group controlId="formBasicEmail">
         <Form.Control
           type="email"
@@ -49,7 +68,12 @@ const SignUp = (props) => {
         <Form.Check type="checkbox" label="Agree to terms and conditions" />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button
+        variant="primary"
+        type="submit"
+        onClick={(event) => signup(event)}
+        c
+      >
         Submit
       </Button>
     </Form>
