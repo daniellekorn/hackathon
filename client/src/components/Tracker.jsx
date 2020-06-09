@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import Button from "react-bootstrap/Button";
 import { ReactMic } from "react-mic";
+import { sendAudio } from "../lib/api";
 
 const Tracker = (props) => {
   const [isRecording, setRecording] = useState(false);
@@ -29,7 +30,9 @@ const Tracker = (props) => {
     setUrl(blob.blobURL);
     setRecording(false);
     //send blob somewhere here
-    console.log(blob);
+    const formData = new FormData();
+    formData.append("audio", blob);
+    sendAudio(formData);
   };
 
   return (
