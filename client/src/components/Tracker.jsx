@@ -26,12 +26,12 @@ const Tracker = (props) => {
     isBlocked ? console.log("Permission Denied") : setRecording(true);
   };
 
-  const handleStop = (blob) => {
+  const handleStop = async (blob) => {
     setUrl(blob.blobURL);
     setRecording(false);
-    //send blob somewhere here
     const formData = new FormData();
-    formData.append("audio", blob);
+    //what is the blob???
+    formData.append("file", blob.blob);
     sendAudio(formData);
   };
 
