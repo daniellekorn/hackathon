@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import Button from "react-bootstrap/Button";
 import { ReactMic } from "react-mic";
+import { sendAudio } from "../lib/api";
 
 const Tracker = (props) => {
   const [isRecording, setRecording] = useState(false);
@@ -25,11 +26,13 @@ const Tracker = (props) => {
     isBlocked ? console.log("Permission Denied") : setRecording(true);
   };
 
-  const handleStop = (blob) => {
+  const handleStop = async (blob) => {
     setUrl(blob.blobURL);
     setRecording(false);
-    //send blob somewhere here
-    console.log(blob);
+    const formData = new FormData();
+    //what is the blob???
+    formData.append("file", blob.blob);
+    sendAudio(formData);
   };
 
   return (
