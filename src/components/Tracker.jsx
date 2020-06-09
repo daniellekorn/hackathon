@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Fragment } from "react";
-import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import { ReactMic } from "react-mic";
 
