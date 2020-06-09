@@ -22,15 +22,20 @@ const Tracker = (props) => {
     );
   }, []);
 
+  let interval;
   const handleStart = () => {
-    isBlocked ? console.log("Permission Denied") : setRecording(true);
+    if (!isBlocked) {
+      interval = setInterval(() => {
+        setRecording(true);
+      }, 20000);
+    }
   };
 
   const handleStop = async (blob) => {
+    clearInterval(interval);
     setUrl(blob.blobURL);
     setRecording(false);
     const formData = new FormData();
-    //what is the blob???
     formData.append("file", blob.blob);
     sendAudio(formData);
   };

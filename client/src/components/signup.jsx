@@ -20,6 +20,7 @@ const SignUp = (props) => {
     setRole(event);
   }
 
+  //role of trainers and users -- get fit (helping to or needing)
   return (
     <Form onSubmit={(event) => handleOnSubmit(event)}
       className="form">
