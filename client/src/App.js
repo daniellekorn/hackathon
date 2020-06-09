@@ -3,25 +3,31 @@ import "./App.css";
 import Tracker from "./components/Tracker";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Signup from "./components/signup"
+// import Container from ".react-bootstrap/Container"
 
 const App = () => {
   return (
+    // <Container>
         <Router>
           <div>
             <ul>
               <li>
-                <Link to="/"><i class="fa fa-home"></i></Link>
+                <Link to="/"><i className="fa fa-home"></i></Link>
               </li>
               <li>
-                <Link to="/signup"><i class="fa fa-user"></i></Link>
+                <Link to="/signup"><i className="fa fa-user"></i></Link>
               </li>
               <li>
-                <Link to="/tracker"><i class="fa fa-bullseye"></i></Link>
+                <Link to="/tracker"><i className="fa fa-bullseye"></i>
+</Link>
               </li>
             </ul>
+          </div>
             <Switch>
               <Route exact path="/">
-                
+              <div className="contain">
+                <h1>welcome</h1>
+                </div>
               </Route>
               <Route path="/signup">
                 <Signup />
@@ -30,8 +36,8 @@ const App = () => {
                 <Tracker />
               </Route>
             </Switch>
-          </div>
         </Router>
+        // </Container>
   );
 }
 

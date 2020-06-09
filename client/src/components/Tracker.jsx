@@ -53,10 +53,9 @@ const Tracker = (props) => {
           <Button onClick={(event) => handleStart(event)} disabled={isRecording}
             variant='dark'
             backgroundColor="#000000"
+            
             >
-           <i class="fa fa-bullseye"
-              className="sound-wave"
-                     ></i>
+           <i class="fa fa-bullseye"></i>
           </Button>
             </div>
 

@@ -36,12 +36,5 @@
       "last 1 safari version"
     ]
   },
-<<<<<<< HEAD
-  "description": "### Helpful Commands:",
-  "main": "index.js",
-  "author": "",
-  "license": "ISC"
-=======
   "proxy": "http://localhost:5000"
->>>>>>> 1677fcc6cbd93596f4113c0ef4450afea394c9ad
 }
