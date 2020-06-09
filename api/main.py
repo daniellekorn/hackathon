@@ -8,8 +8,7 @@ def get_recording():
     data = request.files['file']
     print(type(data))
     print(data)
-    return True
-    # return app.response_class(response=json.dumps(data), status=200, mimetype='application/json')
+    return app.response_class(response={'status': 'ok'}, status=200, mimetype='application/json')
 
 
 if __name__ == "__main__":
