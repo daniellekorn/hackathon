@@ -2,6 +2,7 @@ api/venv
 __pycache__/
 bin
 .idea
+api/.env
 
 
 # dependencies

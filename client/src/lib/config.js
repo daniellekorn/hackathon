@@ -24,7 +24,7 @@ export const googleFire = () => {
       uid: cred.user.uid,
       userName: cred.user.displayName,
       email: cred.user.email,
-      photo: cred.user.photoURL,
+      role: cred.user.role,
     });
   });
 };
