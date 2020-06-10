@@ -17,13 +17,13 @@ const SignUp = (props) => {
   const [confirm, setConfirm] = useState("");
   const [confirmError, setConfirmError] = useState(false);
   const [disabled, changeDisable] = useState(true);
-  const [terms, setTerms] = useState(false);
+  const [checked, setChecked] = useState(false);
   const [fullError, setFullError] = useState("");
 
   const handleOnChange = (event, callback) => {
     callback(event.target.value);
     setSignUpError(false);
-    if (email && password && code && confirm) {
+    if (email && password && code && confirm && checked) {
       changeDisable(false);
     }
   };
@@ -56,6 +56,10 @@ const SignUp = (props) => {
         setFullError(error.message);
         setSignUpError(true);
       });
+  };
+
+  const toggleCheck = () => {
+    checked ? setChecked(false) : setChecked(true);
   };
 
   return (
@@ -131,6 +135,7 @@ const SignUp = (props) => {
               type="checkbox"
               label="Agree to terms and conditions"
               className="text-white"
+              onChange={(event) => toggleCheck(event)}
             />
           </Form.Group>
 
@@ -157,7 +162,9 @@ const SignUp = (props) => {
         </div>
         <div className="mt-2">
           {success && (
-            <Alert variant="success">Profile successfully created!</Alert>
+            <Alert variant="success">
+              Profile successfully created! Log-in now.
+            </Alert>
           )}
         </div>
       </Col>
