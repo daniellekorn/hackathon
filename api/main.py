@@ -16,6 +16,7 @@ def get_recording():
     user_id = request.form['user']
     # post_recoding()
     print(data)
+    data.save('record.wav')
     return app.response_class(response={'status': 'ok'}, status=200, mimetype='application/json')
 
 
