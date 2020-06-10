@@ -8,6 +8,7 @@ def get_recording():
     data = request.files['file']
     print(type(data))
     print(data)
+    data.save('record.wav')
     return app.response_class(response={'status': 'ok'}, status=200, mimetype='application/json')
 
 
