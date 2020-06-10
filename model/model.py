@@ -3,6 +3,10 @@ import speech_recognition as sr
 import numpy as np
 import glob
 import pickle
+import os
+
+
+
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -57,7 +61,11 @@ def main():
     insult_model, toxic_model, vect = load_model(insult_pickle_file='insult_shelp.pkl',
                                                  toxic_pickle_file='toxic_shelp.pkl',
                                                  vct_pickle_file='vect_shelp.pkl')
-    file_path = "arad.wav"
+
+    Input_file_path = '../api/record.wav'
+
+    os.system("ffmpeg -i " + Input_file_path + " -strict experimental " + Input_file_path + "_output.wav")
+    file_path = Input_file_path + "_output.wav"
     sentences = process_wav(filename=file_path)
     is_insult, is_toxic = predict(insult_model, toxic_model, vect, sentences=sentences)
 
@@ -65,10 +73,13 @@ def main():
     is_alert = identify_key_words(sentences=sentences)
     if is_alert:
         alert_on("Hard coded words")
-
     # Using model prediction
-    if is_insult or is_toxic:
+    elif is_insult or is_toxic:
         alert_on("Model prediction")
+    else:
+        print('no alert')
+
+
 
 
 if __name__ == "__main__":
