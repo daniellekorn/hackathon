@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import fire from "../lib/config";
 import Alert from "react-bootstrap/Alert";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -27,6 +27,10 @@ const SignUp = (props) => {
       changeDisable(false);
     }
   };
+
+  useState(() => {
+    window.location.refresh();
+  }, [success]);
 
   const handleOnSelect = (event) => {
     setRole(event);
@@ -162,9 +166,7 @@ const SignUp = (props) => {
         </div>
         <div className="mt-2">
           {success && (
-            <Alert variant="success">
-              Profile successfully created! Log-in now.
-            </Alert>
+            <Alert variant="success">Profile successfully created!</Alert>
           )}
         </div>
       </Col>
