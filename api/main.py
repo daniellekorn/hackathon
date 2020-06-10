@@ -13,15 +13,15 @@ load_dotenv()
 cred = credentials.Certificate("./db-config.json")
 firebase_admin.initialize_app(cred)
 
-# how to create instance of collection
-users = firestore.client().collection('users').get()
-print(users)
-
 
 @app.route("/tracker", methods=["POST"])
 def get_recording():
     data = request.files['audio_data']
     user_id = request.form['user']
+    print(user_id)
+    users = firestore.client().collection('users').where(u'uid', u'==', user_id).stream()
+    for user in users:
+        print(user.to_dict()['code'])
     post_recoding()
     data.save('record.wav')
     result = model.main()
