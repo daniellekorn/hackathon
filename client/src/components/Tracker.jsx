@@ -39,9 +39,9 @@ const Tracker = (props) => {
     setRecording(false);
     // to send to server
     const formData = new FormData();
-    const userId = fire.auth().currentUser.uid;
+    const userId = localStorage.getItem("user");
+    console.log(userId);
     formData.append("audio_data", blob.blob);
-    console.log(blob.blob);
     formData.append("user", userId);
     sendAudio(formData);
   };

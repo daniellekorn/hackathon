@@ -15,11 +15,9 @@ const App = () => {
       if (user) {
         setCurrentUser(user.uid);
         localStorage.setItem("user", user.uid);
-        console.log(localStorage.getItem("user"));
       } else {
         setCurrentUser(null);
         localStorage.removeItem("user");
-        console.log(localStorage.getItem("user"));
       }
     });
   });

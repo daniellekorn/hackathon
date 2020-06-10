@@ -23,14 +23,10 @@ const SignUp = (props) => {
   const handleOnChange = (event, callback) => {
     callback(event.target.value);
     setSignUpError(false);
-    if (email && password && code && confirm && checked) {
+    if (email && password && code && confirm) {
       changeDisable(false);
     }
   };
-
-  useState(() => {
-    window.location.refresh();
-  }, [success]);
 
   const handleOnSelect = (event) => {
     setRole(event);
@@ -51,6 +47,7 @@ const SignUp = (props) => {
           email: email,
           password: password,
           role: role,
+          code: code,
         });
       })
       .then((result) => {
