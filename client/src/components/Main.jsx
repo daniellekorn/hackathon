@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Signup from "./Signup";
 import Button from "react-bootstrap/Button";
 import fire from "../lib/config";
+import Login from "./Login";
 
 const Main = () => {
   const logout = () => {
@@ -11,7 +12,7 @@ const Main = () => {
   };
 
   return (
-    <Router>
+    <div>
       <div>
         <ul>
           <li>
@@ -20,7 +21,7 @@ const Main = () => {
             </Link>
           </li>
           <li>
-            <Link to="/signup">
+            <Link to="/profile">
               <i className="fa fa-user"></i>
             </Link>
           </li>
@@ -40,14 +41,14 @@ const Main = () => {
             </Button>
           </div>
         </Route>
-        <Route path="/signup">
+        <Route path="/profile">
           <div className="text-white">Put user info here</div>
         </Route>
         <Route path="/tracker">
           <Tracker />
         </Route>
       </Switch>
-    </Router>
+    </div>
   );
 };
 

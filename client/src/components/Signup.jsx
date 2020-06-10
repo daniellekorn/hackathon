@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import fire from "../lib/config";
 import Alert from "react-bootstrap/Alert";
 import Dropdown from "react-bootstrap/Dropdown";
+import { Link } from "react-router-dom";
 
 //add questions here to get more profile info
 
@@ -18,6 +19,7 @@ const SignUp = (props) => {
   const [confirmError, setConfirmError] = useState(false);
   const [disabled, changeDisable] = useState(true);
   const [terms, setTerms] = useState(false);
+  const [fullError, setFullError] = useState("");
 
   const handleOnChange = (event, callback) => {
     callback(event.target.value);
@@ -52,6 +54,8 @@ const SignUp = (props) => {
       })
       .catch((error) => {
         setSignUpError(true);
+        console.log(error);
+        setFullError(error);
       });
   };
 
@@ -139,12 +143,9 @@ const SignUp = (props) => {
           Submit
         </Button>
       </Form>
+      <Link to="/login">Already have an account? Log-in!</Link>
       <div className="mt-2">
-        {signUpError && (
-          <Alert variant="danger">
-            Please submit a valid email. Error occurred.
-          </Alert>
-        )}
+        {signUpError && <Alert variant="danger">{fullError}</Alert>}
       </div>
       <div className="mt-2">
         {confirmError && (

@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Signup from "./components/Signup";
 import Main from "./components/Main";
 import fire from "./lib/config";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -23,9 +24,11 @@ const App = () => {
   });
 
   return (
-    <Container className="fullsite">
-      {currentUser ? <Main /> : <Signup />}
-    </Container>
+    <Router>
+      <Container className="fullsite">
+        <Main />
+      </Container>
+    </Router>
   );
 };
 
