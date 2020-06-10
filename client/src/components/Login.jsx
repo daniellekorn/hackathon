@@ -9,6 +9,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
+  const [fullError, setFullError] = useState("");
 
   const login = (e) => {
     e.preventDefault();
@@ -17,12 +18,9 @@ const Login = () => {
       .signInWithEmailAndPassword(email, password)
       .then((u) => {})
       .catch((error) => {
+        setFullError(error.message);
         setLoginError(true);
       });
-  };
-
-  const googleLogIn = () => {
-    googleFire();
   };
 
   return (
@@ -58,21 +56,8 @@ const Login = () => {
         <Link to="/signup" className="ml-3">
           <Button className="btn btn-success">Signup</Button>
         </Link>
-        <Row>
-          <Col md={12} className="mt-2">
-            <Button
-              variant="warning"
-              className="register"
-              onClick={googleLogIn}
-            >
-              Log in with Google
-            </Button>
-          </Col>
-        </Row>
         <Fragment>
-          {loginError && (
-            <Alert variant="danger">Something went wrong. Try again.</Alert>
-          )}
+          {loginError && <Alert variant="danger">{fullError}</Alert>}
         </Fragment>
       </Form>
     </Col>
