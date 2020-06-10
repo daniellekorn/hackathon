@@ -2,6 +2,7 @@ import os
 from flask import Flask, json, request
 from dotenv import load_dotenv
 from firebase import firebase
+from model import model
 
 app = Flask(__name__)
 load_dotenv()
@@ -17,6 +18,7 @@ def get_recording():
     # post_recoding()
     print(data)
     data.save('record.wav')
+    result = model.main()
     return app.response_class(response={'status': 'ok'}, status=200, mimetype='application/json')
 
 

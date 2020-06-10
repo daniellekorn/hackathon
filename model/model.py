@@ -58,28 +58,39 @@ def predict(insult_model, toxic_model, vect, sentences):
 
 
 def main():
-    insult_model, toxic_model, vect = load_model(insult_pickle_file='insult_shelp.pkl',
-                                                 toxic_pickle_file='toxic_shelp.pkl',
-                                                 vct_pickle_file='vect_shelp.pkl')
+    insult_model, toxic_model, vect = load_model(insult_pickle_file='../model/insult_shelp.pkl',
+                                                 toxic_pickle_file='../model/toxic_shelp.pkl',
+                                                 vct_pickle_file='../model/vect_shelp.pkl')
 
     Input_file_path = '../api/record.wav'
 
+    os.remove(Input_file_path + "_output.wav")
     os.system("ffmpeg -i " + Input_file_path + " -strict experimental " + Input_file_path + "_output.wav")
     file_path = Input_file_path + "_output.wav"
     sentences = process_wav(filename=file_path)
     is_insult, is_toxic = predict(insult_model, toxic_model, vect, sentences=sentences)
 
     # Hard coded version
-    is_alert = identify_key_words(sentences=sentences)
-    if is_alert:
-        alert_on("Hard coded words")
+    sisterhood_alert = False
+    is_hc_alert = identify_key_words(sentences=sentences)
+
     # Using model prediction
-    elif is_insult or is_toxic:
+    if is_insult or is_toxic:
         alert_on("Model prediction")
+        sisterhood_alert = True
+    elif is_hc_alert:
+        alert_on("Hard coded words")
+        sisterhood_alert = True
     else:
         print('no alert')
 
+    # Check if magic word was activated
+    magic_word = "bla"  # config.MAGIC_WORD
+    police_alert = False
+    if np.any(np.isin(magic_word, sentences)):
+        police_alert = True
 
+    return {"alert_police": police_alert, "alert_sisterhood": sisterhood_alert}
 
 
 if __name__ == "__main__":
