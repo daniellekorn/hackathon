@@ -19,7 +19,9 @@ def get_recording():
     print(data)
     data.save('record.wav')
     result = model.main()
-    return app.response_class(response={'status': 'ok'}, status=200, mimetype='application/json')
+    result.update({'status': 'ok'})
+    print(result)
+    return app.response_class(response=result, status=200, mimetype='application/json')
 
 
 def post_recoding():
