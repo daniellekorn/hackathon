@@ -39,7 +39,7 @@ const Login = () => {
         <Form.Group>
           <Form.Control
             className="align-self-top"
-            type="input"
+            type="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             name="password"
@@ -49,12 +49,12 @@ const Login = () => {
         <Button
           type="submit"
           onClick={(event) => login(event)}
-          className="btn btn-primary"
+          className="orange-btn"
         >
           Login
         </Button>
         <Link to="/signup" className="ml-3">
-          <Button className="btn btn-success">Signup</Button>
+          <Button className="pink-btn">Signup</Button>
         </Link>
         <Fragment>
           {loginError && <Alert variant="danger">{fullError}</Alert>}
