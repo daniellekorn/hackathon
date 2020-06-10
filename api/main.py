@@ -12,9 +12,9 @@ fireapp = firebase.FirebaseApplication(os.getenv('DATABASE_URL'),  authenticatio
 
 @app.route("/tracker", methods=["POST"])
 def get_recording():
-    data = request.files['file']
+    data = request.files['audio_data']
     user_id = request.form['user']
-    post_recoding()
+    # post_recoding()
     print(data)
     return app.response_class(response={'status': 'ok'}, status=200, mimetype='application/json')
 
