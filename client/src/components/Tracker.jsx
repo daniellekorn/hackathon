@@ -41,6 +41,7 @@ const Tracker = (props) => {
     const formData = new FormData();
     const userId = fire.auth().currentUser.uid;
     formData.append("audio_data", blob.blob);
+    console.log(blob.blob);
     formData.append("user", userId);
     sendAudio(formData);
   };

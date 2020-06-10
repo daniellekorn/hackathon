@@ -3,7 +3,7 @@ __pycache__/
 bin
 .idea
 api/.env
-
+api/db-config.json
 
 # dependencies
 client/node_modules

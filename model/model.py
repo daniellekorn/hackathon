@@ -4,7 +4,13 @@ import numpy as np
 import glob
 import pickle
 import os
-
+import librosa
+import numpy as np
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from keras import backend as K
+from keras.models import load_model
+from keras.optimizers import rmsprop
 
 
 from sklearn.feature_extraction.text import CountVectorizer
@@ -39,7 +45,7 @@ def alert_on(message):
     print("ALERT!!!!", message)
 
 
-def load_model(insult_pickle_file, toxic_pickle_file, vct_pickle_file):
+def shelp_load_model(insult_pickle_file, toxic_pickle_file, vct_pickle_file):
     with open(insult_pickle_file, 'rb') as f:
         insult_model = pickle.load(f)
     with open(toxic_pickle_file, 'rb') as f:
@@ -57,10 +63,34 @@ def predict(insult_model, toxic_model, vect, sentences):
     return is_insult, is_toxic
 
 
+def predict_emotion(file_path):
+    X, sample_rate = librosa.load(file_path, res_type='kaiser_fast', duration=3, sr=22050 * 2, offset=0.5)
+    X = np.concatenate((X, X), axis=None)
+    X = X[:132300]
+    sample_rate = np.array(sample_rate)
+    model = load_model('../model/my_model.k')
+    opt = rmsprop(lr=0.0001, decay=1e-6)
+    model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
+    lb = LabelEncoder()
+    lb.classes_ = np.load('../model/label_classes.npy', allow_pickle=True)
+    features = np.mean(librosa.feature.mfcc(y=X, sr=sample_rate, n_mfcc=13), axis=0)
+    features_df = pd.DataFrame(data=features)
+    features_stacked = features_df.stack().to_frame().T
+    features_expanded = np.expand_dims(features_stacked, axis=2)
+    predictions = model.predict(features_expanded, batch_size=512, verbose=1)
+    predictions_mod = predictions.argmax(axis=1)
+    preds_flat = predictions_mod.astype(int).flatten()
+    preds_flat
+    predictions_array = (lb.inverse_transform((preds_flat)))
+    predictions_array
+    if (predictions_array[0] == 'female_sad' or predictions_array[0] == 'male_angry'):
+        return True
+    return False
+
 def main():
-    insult_model, toxic_model, vect = load_model(insult_pickle_file='../model/insult_shelp.pkl',
-                                                 toxic_pickle_file='../model/toxic_shelp.pkl',
-                                                 vct_pickle_file='../model/vect_shelp.pkl')
+    insult_model, toxic_model, vect = shelp_load_model(insult_pickle_file='../model/insult_shelp.pkl',
+                                                       toxic_pickle_file='../model/toxic_shelp.pkl',
+                                                       vct_pickle_file='../model/vect_shelp.pkl')
 
     Input_file_path = '../api/record.wav'
 

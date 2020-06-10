@@ -14,3 +14,4 @@ Crypto
 pycryptodome
 requests_toolbelt
 tensorflow
+librosa
