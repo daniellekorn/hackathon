@@ -1,7 +1,7 @@
 import React from "react";
 import Tracker from "../components/Tracker";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import Signup from "../components/Signup";
+import Signup from "./Signup";
 import Button from "react-bootstrap/Button";
 import fire from "../lib/config";
 
