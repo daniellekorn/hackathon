@@ -5,15 +5,25 @@ import fire from "../lib/config";
 import Alert from "react-bootstrap/Alert";
 import Dropdown from "react-bootstrap/Dropdown";
 
+//add questions here to get more profile info
+
 const SignUp = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
   const [signUpError, setSignUpError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [code, setCode] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [confirmError, setConfirmError] = useState(false);
+  const [disabled, changeDisable] = useState(true);
+  const [terms, setTerms] = useState(false);
 
   const handleOnChange = (event, callback) => {
     callback(event.target.value);
+    if (email && password && code && confirm) {
+      changeDisable(false);
+    }
   };
 
   const handleOnSelect = (event) => {
@@ -22,6 +32,10 @@ const SignUp = (props) => {
 
   const signup = (e) => {
     e.preventDefault();
+    if (password !== confirm) {
+      setConfirmError(true);
+      return false;
+    }
     fire
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -59,6 +73,24 @@ const SignUp = (props) => {
             placeholder="Password"
             value={password}
             onChange={(event) => handleOnChange(event, setPassword)}
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword">
+          <Form.Control
+            type="password"
+            placeholder="Confirm password"
+            value={confirm}
+            onChange={(event) => handleOnChange(event, setConfirm)}
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formCode">
+          <Form.Control
+            type="text"
+            placeholder="Chosen code word"
+            value={code}
+            onChange={(event) => handleOnChange(event, setCode)}
           />
         </Form.Group>
 
@@ -102,7 +134,7 @@ const SignUp = (props) => {
           variant="primary"
           type="submit"
           onClick={(event) => signup(event)}
-          c
+          disabled={disabled}
         >
           Submit
         </Button>
@@ -112,6 +144,11 @@ const SignUp = (props) => {
           <Alert variant="danger">
             Please submit a valid email. Error occurred.
           </Alert>
+        )}
+      </div>
+      <div className="mt-2">
+        {confirmError && (
+          <Alert variant="danger">Passwords do not match. Try again.</Alert>
         )}
       </div>
       <div className="mt-2">

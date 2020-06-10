@@ -6,7 +6,7 @@ from firebase import firebase
 app = Flask(__name__)
 load_dotenv()
 
-authentication = firebase.FirebaseAuthentication(os.getenv("API_KEY"), '', extra={'id': 123})
+authentication = firebase.FirebaseAuthentication(os.getenv("MY_SECRET"), '', extra={'id': 123})
 fireapp = firebase.FirebaseApplication(os.getenv('DATABASE_URL'),  authentication=authentication)
 
 
