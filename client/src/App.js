@@ -26,7 +26,7 @@ const App = () => {
   return (
     <Router>
       <Container className="fullsite">
-        <Main />
+        {currentUser ? <Main /> : <Signup />}
       </Container>
     </Router>
   );

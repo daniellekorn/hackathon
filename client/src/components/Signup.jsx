@@ -23,6 +23,7 @@ const SignUp = (props) => {
 
   const handleOnChange = (event, callback) => {
     callback(event.target.value);
+    setSignUpError(false);
     if (email && password && code && confirm) {
       changeDisable(false);
     }
@@ -53,9 +54,8 @@ const SignUp = (props) => {
         setSuccess(true);
       })
       .catch((error) => {
+        setFullError(error.message);
         setSignUpError(true);
-        console.log(error);
-        setFullError(error);
       });
   };
 
