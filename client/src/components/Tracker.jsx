@@ -26,7 +26,6 @@ const Tracker = (props) => {
   }, []);
 
   const handleStart = () => {
-    setDataArray([]);
     setRecording(true);
     const intervalId = setInterval(() => {
       setRecording(true);
@@ -39,12 +38,9 @@ const Tracker = (props) => {
     setUrl(blob.blobURL);
     setRecording(false);
     // to send to server
-    let newBlob = new Blob(dataArray, {
-      type: "audio/wav",
-    });
     const formData = new FormData();
     const userId = fire.auth().currentUser.uid;
-    formData.append("audio_data", newBlob);
+    formData.append("audio_data", blob.blob);
     formData.append("user", userId);
     sendAudio(formData);
   };
