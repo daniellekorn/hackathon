@@ -15,15 +15,14 @@ const SignUp = (props) => {
   const handleOnChange = (event, callback) => {
     callback(event.target.value);
   };
-  
-  const handleOnSelect  = (event) => {
+
+  const handleOnSelect = (event) => {
     setRole(event);
-  }
+  };
 
   //role of trainers and users -- get fit (helping to or needing)
   return (
-    <Form onSubmit={(event) => handleOnSubmit(event)}
-      className="form">
+    <Form onSubmit={(event) => handleOnSubmit(event)} className="form">
       <Form.Group controlId="formBasicEmail">
         <Form.Control
           type="email"
@@ -43,19 +42,32 @@ const SignUp = (props) => {
       </Form.Group>
 
       <Form.Group controlId="formRole">
-
         <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic" className="dropdown">
-          {role}
-  </Dropdown.Toggle>
+          <Dropdown.Toggle
+            variant="success"
+            id="dropdown-basic"
+            className="dropdown"
+          >
+            {role}
+          </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1" eventKey="Trainer" onSelect={(event) => handleOnSelect(event)}>Trainer</Dropdown.Item>
-            <Dropdown.Item href="#/action-2" eventKey="Looking to get in shape" onSelect={(event) => handleOnSelect(event)}>Looking to get in shape</Dropdown.Item>
+            <Dropdown.Item
+              href="#/action-1"
+              eventKey="Trainer"
+              onSelect={(event) => handleOnSelect(event)}
+            >
+              Trainer
+            </Dropdown.Item>
+            <Dropdown.Item
+              href="#/action-2"
+              eventKey="Looking to get in shape"
+              onSelect={(event) => handleOnSelect(event)}
+            >
+              Looking to get in shape
+            </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-
       </Form.Group>
-
 
       <Form.Group controlId="formBasicCheckbox">
         <Form.Check type="checkbox" label="Agree to terms and conditions" />
